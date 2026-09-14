@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Alida Di Gaetano</title>
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --light-blue: #9FB7D0;
+            --dark-blue: #0A1C3A;
+            --pink: #F4C7CD;
+            --deep-red: #711116;
+            --pure-white: #FFFFFF;
+            
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--dark-blue);
+            color: var(--pink);
+            overflow-x: hidden; 
+        }
+
+        /* --- SCHERMATA 1: BENVENUTO --- */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--light-blue);
+            background-image: url('mani 3.svg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10000;
+            padding: 2rem;
+            overflow: hidden;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #welcome-screen.hidden {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+
+        .welcome-box {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-box h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            color: var(--pure-white);
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            text-shadow: 0 4px 20px rgba(10, 28, 58, 0.4);
+            white-space: nowrap;
+        }
+
+        .welcome-box h1 span {
+            color: var(--deep-red);
+        }
+
+        .welcome-box p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--dark-blue);
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        .next-arrow-btn {
+            margin-top: 1rem;
+            background-color: var(--deep-red);
+            color: var(--pink);
+            border: none;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+            z-index: 3;
+        }
+
+        .next-arrow-btn svg {
+            width: 30px;
+            height: 30px;
+            stroke: currentColor;
+            stroke-width: 3.5;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .next-arrow-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--pure-white);
+            color: var(--deep-red);
+        }
+
+        .next-arrow-btn:hover svg {
+            transform: translateX(5px);
+        }
+
+
+        /* --- SCHERMATA 2: SPLIT SCREEN --- */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #intro-screen.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #intro-screen.hidden {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+
+        .intro-back-btn {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            z-index: 10010;
+            background-color: var(--pure-white);
+            color: var(--dark-blue);
+            border: none;
+            padding: 10px 20px;
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .intro-back-btn:hover {
+            transform: translateX(-5px);
+            background-color: var(--dark-blue);
+            color: var(--pure-white);
+        }
+
+        .intro-split-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .intro-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: flex 0.4s ease, background-color 0.4s ease;
+            position: relative;
+        }
+
+        .intro-side:hover { flex: 1.15; }
+
+        .messy-side {
+            background-color: var(--pink);
+            color: var(--deep-red);
+            border-right: 2px solid var(--dark-blue);
+            perspective: 1200px;
+        }
+        .messy-side:hover { background-color: var(--deep-red); color: var(--pink); }
+
+        .focus-side {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+        }
+        .focus-side:hover { background-color: var(--dark-blue); color: var(--light-blue); }
+
+        .intro-content-box {
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .intro-side-title {
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.2rem;
+        }
+
+        .intro-text { 
+            font-size: 1.05rem; 
+            font-weight: 400; 
+            line-height: 1.5; 
+        }
+
+        .intro-action { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            opacity: 0.85; 
+            border-bottom: 2px solid currentColor; 
+            padding-bottom: 2px; 
+            margin-top: 0.8rem; 
+        }
+
+        .intro-mascot { width: 140px; height: 140px; margin-bottom: 0.5rem; filter: drop-shadow(0px 10px 12px rgba(0,0,0,0.18)); }
+
+        /* --- ANIMAZIONI --- */
+        @keyframes autoBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+        .blinking-eyes {
+            transform-origin: center 44px;
+            animation: autoBlink 4s infinite;
+        }
+
+        .messy-wrapper { 
+            transform-style: preserve-3d; 
+            transform-origin: center;
+        }
+        .messy-side:hover .messy-wrapper {
+            animation: naturalSpin 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes naturalSpin {
+            0% { transform: rotateY(0deg) rotateZ(0deg) translateY(0) scale(1); }
+            50% { transform: rotateY(180deg) rotateZ(6deg) translateY(-15px) scale(1.08); }
+            100% { transform: rotateY(360deg) rotateZ(0deg) translateY(0) scale(1); }
+        }
+
+        .focus-wrapper {
+            transform-origin: bottom center;
+        }
+        .focus-side:hover .focus-wrapper {
+            animation: bounceFocus 0.6s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+        }
+        @keyframes bounceFocus {
+            0% { transform: translateY(0) scale(1, 1); }
+            30% { transform: translateY(-22px) scale(0.95, 1.05); }
+            50% { transform: translateY(0) scale(1.08, 0.92); }
+            70% { transform: translateY(-10px) scale(0.98, 1.02); }
+            100% { transform: translateY(0) scale(1, 1); }
+        }
+
+
+        /* --- CONTENUTO PORTFOLIO --- */
+        #portfolio-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .back-nav { position: fixed; top: 25px; left: 30px; z-index: 1000; }
+        
+        .back-btn {
+            border: none; padding: 10px 20px;
+            font-family: var(--font-main); font-size: 0.85rem; font-weight: 800; text-transform: uppercase;
+            border-radius: 30px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex; align-items: center; gap: 8px; transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+        .back-btn:hover { transform: translateX(-5px); }
+
+        #creative-section .back-btn { background-color: var(--light-blue); color: var(--dark-blue); }
+        #creative-section .back-btn:hover { background-color: var(--pink); color: var(--deep-red); }
+
+        #marketing-section .back-btn { background-color: var(--pink); color: var(--deep-red); }
+        #marketing-section .back-btn:hover { background-color: var(--dark-blue); color: var(--light-blue); }
+
+        .portfolio-section {
+            display: none;
+            padding: 5rem 10% 4rem 10%;
+            min-height: 100vh;
+        }
+
+        #creative-section { background-color: var(--deep-red); color: var(--pink); }
+        #marketing-section { background-color: var(--light-blue); color: var(--dark-blue); }
+
+        .section-header { margin-bottom: 2rem; padding-top: 1rem; }
+        .section-title { font-size: 3rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; }
+        .sub-section-title { font-size: 1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+
+        .card {
+            background-color: var(--pink); color: var(--dark-blue); padding: 2rem; border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; display: flex; flex-direction: column;
+        }
+        #marketing-section .card { background-color: var(--dark-blue); color: var(--pink); }
+
+        .card.clickable { cursor: pointer; }
+        #creative-section .card.clickable:hover { transform: translateY(-5px); box-shadow: 8px 8px 0px var(--light-blue); }
+        #marketing-section .card.clickable:hover { transform: translateY(-5px); box-shadow: 8px 8px 0px var(--deep-red); }
+
+        .card-category { font-size: 0.75rem; font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        #creative-section .card-category { color: var(--deep-red); }
+        #marketing-section .card-category { color: var(--light-blue); }
+
+        .card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; letter-spacing: -0.5px; }
+        #creative-section .card h3 { color: var(--dark-blue); }
+        #marketing-section .card h3 { color: var(--pink); }
+
+        .card p { line-height: 1.5; font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+        #creative-section .card p { color: #333; }
+        #marketing-section .card p { color: #D0D9E2; }
+        
+        .collab-credits { display: block; margin-bottom: 1.5rem; font-size: 0.8rem; font-style: italic; }
+        #creative-section .collab-credits { color: #666; }
+        #marketing-section .collab-credits { color: #A0B2C6; }
+
+        .tags { margin-top: auto; }
+        .tags span { display: inline-block; padding: 6px 12px; border-radius: 2px; font-size: 0.75rem; font-weight: 600; margin-right: 6px; margin-bottom: 6px; }
+        #creative-section .tags span { background: var(--light-blue); color: var(--dark-blue); }
+        #marketing-section .tags span { background: var(--pink); color: var(--deep-red); }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(10, 28, 58, 0.95); backdrop-filter: blur(5px); }
+        .modal-content { margin: 3% auto; width: 90%; height: 85vh; border-radius: 6px; position: relative; overflow: hidden; background-color: var(--pink); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .video-modal { background-color: #000; display: flex; align-items: center; justify-content: center; }
+        .audio-modal { background-color: var(--pink); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; gap: 30px; }
+        .audio-modal h3 { font-size: 1.5rem; color: var(--deep-red); font-weight: 800; text-transform: uppercase; }
+        .audio-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .audio-container p { font-weight: 600; color: var(--dark-blue); }
+        .audio-container audio { width: 100%; outline: none; }
+
+        .mixed-modal { background-color: var(--pink); overflow-y: auto; padding: 40px 20px 20px 20px; }
+        .mixed-modal video { width: 100%; max-height: 60vh; border-radius: 4px; margin-bottom: 20px; background: #000; }
+        .mixed-modal iframe, .mixed-modal embed { width: 100%; height: 80vh; border-radius: 6px; }
+
+        /* Sfondo coordinato con il rosa del tema per eliminare le bande nere nei PDF */
+        .pdf-modal { background-color: var(--pink); }
+        
+        .pdf-modal iframe, .pdf-modal embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background-color: var(--pink);
+        }
+
+        .close-btn {
+            position: absolute; top: 15px; right: 20px; color: #1a1a1a; font-size: 28px; font-weight: 700;
+            cursor: pointer; z-index: 20; background: #fff; border-radius: 50%; width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+        }
+        .close-btn:hover { background: var(--deep-red); color: #fff; transform: scale(1.1); }
+        iframe, video, embed { border: none; outline: none; width: 100%; height: 100%; }
+
+        @media (max-width: 768px) {
+            #intro-screen { flex-direction: column; overflow-y: auto; height: auto; min-height: 100vh; }
+            .intro-side { padding: 3rem 1.5rem; border-right: none; border-bottom: 2px solid var(--dark-blue); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCHERMATA 1: BENVENUTO -->
+    <div id="welcome-screen">
+        <div class="welcome-box">
+            <h1>CIAO, SONO ALIDA E<br>SONO FATTA DI <span>DUE METÀ</span></h1>
+            <p>Benvenuto nel mio portfolio.</p>
+            
+            <button class="next-arrow-btn" onclick="showSplitScreen()">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- SCHERMATA 2: SPLIT SCREEN -->
+    <div id="intro-screen">
+        
+        <button class="intro-back-btn" onclick="goToWelcome(event)">
+            &#8592; Indietro
+        </button>
+
+        <div class="intro-split-container">
+            <div class="intro-side messy-side" onclick="selectSection('creative')">
+                <div class="intro-content-box">
+                    <h2 class="intro-side-title">Art Direction & Copywriting</h2>
+                    <div class="messy-wrapper">
+                        <svg class="intro-mascot" viewBox="0 0 100 100">
+                            <ellipse cx="50" cy="91" rx="22" ry="4.5" fill="rgba(0,0,0,0.18)"/>
+                            <path fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="4" stroke-linecap="round" d="M 42,32 C 52,12 72,22 62,42 C 82,32 92,52 72,62 C 87,77 62,92 52,72 C 32,87 12,72 32,52 C 12,42 22,22 42,32"/>
+                            <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M 40,30 C 50,10 70,20 60,40 C 80,30 90,50 70,60 C 85,75 60,90 50,70 C 30,85 10,70 30,50 C 10,40 20,20 40,30 M 45,35 C 65,15 75,45 55,65 C 35,85 15,55 35,35 M 50,25 C 70,45 60,75 40,55 C 20,35 40,15 50,25" />
+                            <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M 35,45 C 45,25 65,35 55,55 C 45,75 25,65 35,45" />
+                            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M 28,50 C 20,60 15,75 18,80" />
+                            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M 72,50 C 80,60 85,75 82,80" />
+                            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M 42,72 L 40,90 L 34,90" />
+                            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M 58,72 L 60,90 L 65,92" />
+                            
+                            <g class="blinking-eyes">
+                                <circle cx="45" cy="44" r="5.5" fill="#FFFFFF" stroke="currentColor" stroke-width="1.8"/>
+                                <circle cx="47" cy="43.5" r="2" fill="currentColor"/>
+                                <circle cx="45.5" cy="42" r="0.8" fill="#FFF"/>
+                                
+                                <circle cx="55" cy="44" r="5.5" fill="#FFFFFF" stroke="currentColor" stroke-width="1.8"/>
+                                <circle cx="53" cy="43.5" r="2" fill="currentColor"/>
+                                <circle cx="54.5" cy="42" r="0.8" fill="#FFF"/>
+                            </g>
+                            <path d="M 46,52 C 50,56 52,52 52,52" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <p class="intro-text">Lei è <strong>Miss Messy</strong>, il mio caos creativo, e ci teneva a farvi sapere che l'idea di questo portfolio è farina del suo sacco.</p>
+                    <span class="intro-action">Guarda i progetti creativi</span>
+                </div>
+            </div>
+
+            <div class="intro-side focus-side" onclick="selectSection('marketing')">
+                <div class="intro-content-box">
+                    <h2 class="intro-side-title">Communication, Marketing e Strategy</h2>
+                    <div class="focus-wrapper">
+                        <svg class="intro-mascot" viewBox="0 0 100 100">
+                            <ellipse cx="50" cy="91" rx="20" ry="4" fill="rgba(0,0,0,0.15)"/>
+                            <circle cx="50" cy="50" r="30" fill="currentColor"/>
+                            <path fill="none" stroke="var(--pure-white)" stroke-width="2" stroke-linecap="round" d="M 23,45 C 12,55 18,72 28,66" />
+                            <path fill="none" stroke="var(--pure-white)" stroke-width="2" stroke-linecap="round" d="M 77,45 C 88,55 82,72 72,66" />
+                            <path fill="none" stroke="var(--pure-white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 42,80 L 42,92 L 36,92" />
+                            <path fill="none" stroke="var(--pure-white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 58,80 L 58,92 L 64,92" />
+                            <g class="blinking-eyes">
+                                <circle cx="42" cy="44" r="5" fill="#FFFFFF" stroke="var(--dark-blue)" stroke-width="1.5"/>
+                                <circle cx="43.5" cy="43.5" r="1.8" fill="var(--dark-blue)"/>
+                                <circle cx="42.5" cy="42" r="0.6" fill="#FFF"/>
+                                <circle cx="58" cy="44" r="5" fill="#FFFFFF" stroke="var(--dark-blue)" stroke-width="1.5"/>
+                                <circle cx="56.5" cy="43.5" r="1.8" fill="var(--dark-blue)"/>
+                                <circle cx="57.5" cy="42" r="0.6" fill="#FFF"/>
+                            </g>
+                            <path fill="none" stroke="var(--pure-white)" stroke-width="1.8" stroke-linecap="round" d="M 45,54 Q 50,59 55,54" />
+                            <g fill="none" stroke="var(--pure-white)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="35" y="37" width="13" height="11" rx="2" fill="rgba(255, 255, 255, 0.15)"/>
+                                <rect x="52" y="37" width="13" height="11" rx="2" fill="rgba(255, 255, 255, 0.15)"/>
+                                <line x1="48" y1="41" x2="52" y2="41"/>
+                                <path d="M 35,39 L 29,35"/>
+                                <path d="M 65,39 L 71,35"/>
+                                <path d="M 37,34 Q 41,31 46,34"/>
+                                <path d="M 54,34 Q 59,31 63,34"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <p class="intro-text">Lui è <strong>Mr. Focus</strong>, la mente strategica (un po' pignolo, ma simpatico se lo si impara a conoscere).</p>
+                    <span class="intro-action">Guarda i progetti strategici</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENITORE PRINCIPALE PORTFOLIO -->
+    <div id="portfolio-content">
+
+        <!-- SEZIONE CREATIVA -->
+        <section id="creative-section" class="portfolio-section">
+            
+            <div class="back-nav">
+                <button class="back-btn" onclick="goToIntro()">
+                    &#8592; Torna alla scelta
+                </button>
+            </div>
+            
+            <div class="section-header">
+                <h2 class="section-title">L'anima Creativa</h2>
+            </div>
+            
+            <h3 class="sub-section-title">PROGETTI PROFESSIONALI & ESPERIENZE</h3>
+            <div class="grid" style="margin-bottom: 3rem;">
+                <div class="card clickable" onclick="openModal('shooting-modal')">
+                    <div class="card-category">Art Direction & Production</div>
+                    <h3>Luxury Wine Resort 5★: Shooting & Video Production</h3>
+                    <p>Direzione artistica e coordinamento sul set per la produzione visiva di Baglio Oneto dei Principi di San Lorenzo. Dalla pianificazione delle riprese alla cura del set design, fino alla supervisione diretta dei fornitori per la fotografia e il videomaking, garantendo un racconto visivo elegante e fedele all'identità del resort.</p>
+                    <div class="tags"><span>Art Direction</span><span>Set Design</span><span>Photo & Video</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('moline-modal')">
+                    <div class="card-category">Graphic Design & Packaging</div>
+                    <h3>Osteria delle Moline: Wine Label Design</h3>
+                    <p>Progettazione e sviluppo grafico di due etichette per il vino della casa, coniugando l'identità del brand con un'estetica ricercata e distintiva per il packaging di sala.</p>
+                    <div class="tags"><span>Label Design</span><span>Packaging</span><span>Visual Identity</span></div>
+                </div>
+            </div>
+
+            <h3 class="sub-section-title">Progetti Accademici (Master IED)</h3>
+            <div class="grid">
+                <div class="card clickable" onclick="openModal('swedish-modal')">
+                    <div class="card-category">Human Insights & Interactive Web App</div>
+                    <h3>The Swedish Number: International Keypad</h3>
+                    <p>Esame HUMAN INSIGHT: analisi strategica della celebre campagna svedese pluripremiata, raccontata con lo sviluppo di un'applicazione web interattiva che simula un tastierino telefonico.</p>
+                    <div class="tags"><span>Human Insights</span><span>Web App</span><span>Strategy & UI</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('delonghi-modal')">
+                    <div class="card-category">DOOH Campaign Concept</div>
+                    <h3>De'Longhi: The Regret Cappuccino</h3>
+                    <p>Campagna DOOH dinamica collegata in tempo reale ai dati meteo. Sfruttando l'insight del disagio mattutino sotto pioggia e freddo, i cartelloni affissi vicino ai bar ironizzano sul tragitto per ricordare che il cappuccino perfetto si poteva fare a casa.</p>
+                    <div class="tags"><span>DOOH</span><span>Copywriting</span><span>Dynamic Advertising</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('netflix-board-modal')">
+                    <div class="card-category">Launch Campaign Concept</div>
+                    <h3>Netflix: Il Falso Perfetto di Nairobi</h3>
+                    <p>Campagna di lancio per lo spin off de La Casa di Carta incentrato su Nairobi. Sfruttando la viralità della notizia del furto al Louvre, viene installata in piazza una teca contenente dei falsi d'autore dei gioielli rubati; illuminandoli con lampade UV svelano una filigrana luminescente con la data di uscita della serie tv.</p>
+                    <div class="tags"><span>Guerrilla Marketing</span><span>Viral Campaign</span><span>Activation</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('redbull-modal')">
+                    <div class="card-category">Experiential Activation</div>
+                    <h3>Red Bull x The North Face: Urban Alpinism</h3>
+                    <p>Attivazione esperienziale che trasforma le facciate di palazzi storici urbani in pareti d'arrampicata temporanee. I passanti più coraggiosi possono tentare la scalata imbracati, riforniti dall'energia di Red Bull e attrezzati da The North Face.</p>
+                    <div class="tags"><span>Experiential Activation</span><span>Brand Partnership</span><span>Urban Sports</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('kinder-modal')">
+                    <div class="card-category">Brand Collab Concept</div>
+                    <h3>Kinder x IKEA: Casa Dolce Casa</h3>
+                    <p>Un'intuizione creativa che coniuga il rigore del design funzionale con la golosità dei prodotti dolciari più iconici. Una collezione d'arredamento in cui ogni elemento richiama la consistenza, i colori e il piacere visivo degli snack che hanno segnato la nostra infanzia.</p>
+                    <span class="collab-credits">In collaborazione con Matteo Tirocchi</span>
+                    <div class="tags"><span>Art Direction</span><span>Copywriting</span><span>Concept Design</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('netflix-modal')">
+                    <div class="card-category">Video Production</div>
+                    <h3>Spot Netflix</h3>
+                    <p>Progetto realizzato interamente in autonomia, dall'ideazione dello script all'allestimento del set. Abbiamo curato la regia, gestito il noleggio tecnico e operato in prima persona su videocamera, illuminazione e microfonazione boom per le riprese audio/video.</p>
+                    <span class="collab-credits">In collaborazione con Michela Caruso, Anita Artioli, Diego Demartis</span>
+                    <div class="tags"><span>Video Making</span><span>Scriptwriting</span><span>Directing</span></div>
+                </div>
+                
+                <div class="card clickable" onclick="openModal('caritas-modal')">
+                    <div class="card-category">Campagna Integrata | Shortlist Spot School Awards</div>
+                    <h3>Caritas: "Wear the Change"</h3>
+                    <p>Progetto nato per trasformare la beneficenza in un nuevo trend per la Gen Z. Partendo dall'insight che 8 ragazzi su 10 acquistano second-hand, abbiamo immaginato di trasformare i magazzini Caritas in fashion LAB.</p>
+                    <span class="collab-credits">In collaborazione con Iris Cardarelli e Noemi Cornalba</span>
+                    <div class="tags"><span>Brand Analysis</span><span>Copywriting</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('sincro-modal')">
+                    <div class="card-category">UI/UX Design</div>
+                    <h3>SINCRO Mobile App</h3>
+                    <p>Progettazione degli sketch UI e prototipazione interattiva su Figma per un'applicazione dedicata al mood tracking e alla comunicazione emotiva di coppia.</p>
+                    <span class="collab-credits">In collaborazione con Ginevra Di Foggia, Noemi Cornalba e Michele Ferrandi</span>
+                    <div class="tags"><span>Figma</span><span>Prototyping</span><span>App Design</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('amplifon-modal')">
+                    <div class="card-category">Radio Advertising & Copywriting</div>
+                    <h3>Amplifon: Spot Radio & AI Voice</h3>
+                    <p>Ideazione e scrittura di due spot radio ironici focalizzati sull'ascolto consapevole. Gli spot sono stati ideati, sceneggiati e registrati utilizzando l'intelligenza artificiale per la generazione e sincronizzazione delle voci.</p>
+                    <div class="tags"><span>Radio Spot</span><span>Copywriting</span><span>AI Audio Generation</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE MARKETING E STRATEGIA -->
+        <section id="marketing-section" class="portfolio-section">
+            
+            <div class="back-nav">
+                <button class="back-btn" onclick="goToIntro()">
+                    &#8592; Torna alla scelta
+                </button>
+            </div>
+            
+            <div class="section-header">
+                <h2 class="section-title">L'anima Strategica</h2>
+            </div>
+            
+            <h3 class="sub-section-title">PROGETTI PROFESSIONALI & ESPERIENZE</h3>
+            <div class="grid" style="margin-bottom: 3rem;">
+                <div class="card clickable" onclick="openModal('mozia-modal')">
+                    <div class="card-category">Digital PR & Cultural Sponsorship</div>
+                    <h3>Sponsorship Premio Internazionale Mozia (UNESCO)</h3>
+                    <p>Strategia di comunicazione e digital PR curata per la sponsorizzazione della III Edizione del Premio Internazionale Mozia da parte di Baglio Oneto, a supporto della candidatura UNESCO dell'Isola di Mozia e della Laguna dello Stagnone.</p>
+                    <div class="tags"><span>Digital PR</span><span>Media Relations</span><span>UNESCO Strategy</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('balarm-modal')">
+                    <div class="card-category">Digital PR & Media Partnership</div>
+                    <h3>Partnership Editoriale & Social: Balarm</h3>
+                    <p>Accordo editoriale e promozione strategica concordata con la testata Balarm, comprendente la pubblicazione di un articolo dedicato e una campagna video sponsorizzata su Instagram e Facebook.</p>
+                    <div class="tags"><span>Media Partnership</span><span>Social Advertising</span><span>PR</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('influencer-modal')">
+                    <div class="card-category">Influencer Marketing & PR</div>
+                    <h3>Creator & Influencer Partnership</h3>
+                    <p>Strategia di influencer marketing sviluppata per Baglio Oneto, focalizzata sulla selezione e gestione di creator di settore per la promozione esperienziale della struttura e dei suoi servizi.</p>
+                    <div class="tags"><span>Influencer Marketing</span><span>Content Strategy</span><span>PR</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('ulisse-modal')">
+                    <div class="card-category">Advertising & Performance</div>
+                    <h3>Wine Resort 5★: Campagna Meta Ads Brand Awareness</h3>
+                    <p>Campagna di brand awareness per massimizzare la copertura sfruttando la risonanza mediatica dei luoghi di ripresa del film Odissea di Christopher Nolan vicino alla struttura. Ha generato oltre 573 mila visualizzazioni uniche e 1,2 milioni di impressioni con un CPC di 0,04 €.</p>
+                    <div class="tags"><span>Meta Ads</span><span>Brand Awareness</span><span>Turismo Lusso</span></div>
+                </div>
+
+                <div class="card clickable" onclick="openModal('pasqua-modal')">
+                    <div class="card-category">Advertising & Performance</div>
+                    <h3>Wine Resort 5★: Campagna Meta Ads Event Promotion</h3>
+                    <p>Campagna digital geolocalizzata per promuovere il pranzo festivo in un wine resort di lusso. Sfruttando un targeting di prossimità e pubblico profilato, ha registrato un CTR del 3.79% e un CPC inferiore a 0.03€, portando al sold-out anticipato dei coperti.</p>
+                    <div class="tags"><span>Meta Ads</span><span>Event Promotion</span></div>
+                </div>
+            </div>
+
+            <h3 class="sub-section-title">Tesi di Laurea (Triennale)</h3>
+            <div class="grid" style="margin-bottom: 3rem;">
+                <div class="card clickable" onclick="openModal('tesi-modal')">
+                    <div class="card-category">Academic Research & Luxury Semiotics</div>
+                    <h3>Il Vino come Status Symbol: Semiotica del Lusso</h3>
+                    <p>Tesi di laurea triennale in Scienze della Comunicazione. Un'analisi approfondita del marketing del lusso nel settore vitivinicolo, studio comparativo di Antinori, Tenuta San Guido e Gaja, e progetto di riposizionamento per il Cipponeri Rosso Riserva di Ansaldi.</p>
+                    <div class="tags"><span>Semiotics</span><span>Luxury Marketing</span><span>Brand Positioning</span></div>
+                </div>
+            </div>
+
+            <h3 class="sub-section-title">Progetto Accademico (Triennale)</h3>
+            <div class="grid">
+                <div class="card clickable" onclick="openModal('camst-modal')">
+                    <div class="card-category">Communication Plan & PESTLE Analysis</div>
+                    <h3>Camst Group: Piano di Comunicazione 2025</h3>
+                    <p>Piano strategico di comunicazione incentrato su innovazione e sostenibilità per Camst Group. Il progetto include PESTLE analysis, SWOT analysis, obiettivi di riduzione degli sprechi alimentari e strategie multicanale PESTLE/PAID/EARNED/SHARED/OWNED.</p>
+                    <div class="tags"><span>Strategy</span><span>PESTLE</span><span>Sustainability</span></div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- MODALS -->
+    
+    <div id="shooting-modal" class="modal">
+        <div class="modal-content mixed-modal" style="padding: 40px 20px; background: var(--pink);">
+            <span class="close-btn" onclick="closeModal('shooting-modal', ['shooting-video-1', 'shooting-video-2', 'shooting-video-3'])" style="position: fixed; top: 3%; right: 3%;">&times;</span>
+            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+                <div style="text-align: center;">
+                    <h3 style="color: var(--deep-red); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase;">Portfolio Shooting</h3>
+                    <video id="shooting-video-1" controls controlsList="nodownload" style="width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
+                        <source src="https://www.dropbox.com/scl/fi/xgax7yq392t192ovmkr8i/Portfolio-Shooting.mp4?rlkey=aq3pnjik7pri2jqp75mdznftu&st=wqbekisx&raw=1" type="video/mp4">
+                    </video>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="color: var(--deep-red); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase;">Final Cut - Orizzontale (Amunì Studio)</h3>
+                    <video id="shooting-video-2" controls controlsList="nodownload" style="width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
+                        <source src="https://www.dropbox.com/scl/fi/7v2inkwnaswv8e2ar7ygy/AMUNI_FreeReel_HD.mp4?rlkey=vcsxy6bn3s46hodegxrq2o1v1&st=3g5r49qt&raw=1" type="video/mp4">
+                    </video>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="color: var(--deep-red); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase;">Final Cut - Verticale (Amunì Studio)</h3>
+                    <video id="shooting-video-3" controls controlsList="nodownload" style="width: auto; max-width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
+                        <source src="https://www.dropbox.com/scl/fi/1kiavvxzennl4jw8m4zuh/AMUNI_FreeReel_VT.mp4?rlkey=lobl0dl1upvp3oodd283gspot&st=n85btrml&raw=1" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="kinder-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('kinder-modal')">&times;</span><embed src="Kinder x Ikea.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+    <div id="netflix-modal" class="modal"><div class="modal-content video-modal"><span class="close-btn" onclick="closeModal('netflix-modal', 'netflix-video')">&times;</span><video id="netflix-video" controls controlsList="nodownload"><source src="https://www.dropbox.com/scl/fi/lsw0m99ldn0iuj0scblao/SPOT-NETFLIX.mp4?rlkey=dr2d2lghlopp9am79ctu5hauo&st=5i12b7sm&raw=1" type="video/mp4"></video></div></div>
+    <div id="caritas-modal" class="modal"><div class="modal-content mixed-modal"><span class="close-btn" onclick="closeModal('caritas-modal', 'caritas-video')" style="position: fixed; top: 3%; right: 3%;">&times;</span><video id="caritas-video" controls controlsList="nodownload"><source src="https://www.dropbox.com/scl/fi/ooos8ugnvhkp1lpmz3vlp/Caritas-Case-study-Wear-The-Change.mp4?rlkey=vrikp67bfk9vx3m4374050ehr&st=3of9mleg&raw=1" type="video/mp4"></video><embed src="Caritas Board Wear The Change.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+    <div id="sincro-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('sincro-modal')">&times;</span><iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FLxh1YqGxHEeG5b1pIosms7%2FMOBILE-APP%3Fnode-id%3D255-77%26t%3D6m0ZTTR0F5guLkcj-1" allowfullscreen></iframe></div></div>
+    
+    <div id="swedish-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('swedish-modal')">&times;</span><iframe src="https://alida-humaninsights.netlify.app/" allowfullscreen></iframe></div></div>
+
+    <!-- BOARD VERTICALI OTTIMIZZATE (VIEW=FIT) -->
+    <div id="delonghi-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('delonghi-modal')">&times;</span><embed src="Board De Longhi).pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"></div></div>
+    <div id="netflix-board-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('netflix-board-modal')">&times;</span><embed src="Board Netflixpdf.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"></div></div>
+    <div id="redbull-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('redbull-modal')">&times;</span><embed src="Board RedBullpdf.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"></div></div>
+
+    <div id="amplifon-modal" class="modal">
+        <div class="modal-content audio-modal">
+            <span class="close-btn" onclick="closeModal('amplifon-modal', ['audio-1', 'audio-2'])">&times;</span>
+            <h3>Amplifon: Spot Radio & AI Voice</h3>
+            <div class="audio-container">
+                <p>Spot 1: Nonno e Nipote</p>
+                <audio id="audio-1" controls controlsList="nodownload">
+                    <source src="nonno-e-nipote-velocizzato.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="audio-container">
+                <p>Spot 2: Regista</p>
+                <audio id="audio-2" controls controlsList="nodownload">
+                    <source src="regista-def.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PER ETICHETTE OSTERIA DEL MOLINE -->
+    <div id="moline-modal" class="modal">
+        <div class="modal-content mixed-modal" style="padding: 40px 20px; background: var(--pink);">
+            <span class="close-btn" onclick="closeModal('moline-modal')" style="position: fixed; top: 3%; right: 3%;">&times;</span>
+            <div style="max-width: 1050px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; color: var(--dark-blue);">
+                <div style="text-align: center;">
+                    <h3 style="margin-bottom: 35px; color: var(--deep-red); font-size: 1.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Osteria delle Moline: Wine Label Design</h3>
+                    
+                    <!-- COPPIA ROSSO -->
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 45px;">
+                        <h4 style="color: var(--dark-blue); font-size: 1.3rem; font-weight: 800; text-transform: uppercase;">Rosso moline</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center;">
+                            <div style="flex: 1; min-width: 240px; text-align: center;">
+                                <img src="ROSSO MOLINE.png" alt="Etichetta Rosso Moline" style="width: 100%; max-width: 220px; height: auto; object-fit: contain; display: block; margin: 0 auto;">
+                            </div>
+                            <div style="flex: 1; min-width: 240px; text-align: center;">
+                                <img src="Bottiglia rosso moline.png" alt="Bottiglia Rosso Moline Scontornata" style="max-height: 520px; width: auto; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); display: block; margin: 0 auto; background: transparent;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COPPIA BIANCO -->
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <h4 style="color: var(--dark-blue); font-size: 1.3rem; font-weight: 800; text-transform: uppercase;">Bianco moline</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center;">
+                            <div style="flex: 1; min-width: 240px; text-align: center;">
+                                <img src="etchetta bianco scritta blu FINALE.png" alt="Etichetta Bianco Moline" style="width: 100%; max-width: 220px; height: auto; object-fit: contain; display: block; margin: 0 auto;">
+                            </div>
+                            <div style="flex: 1; min-width: 240px; text-align: center;">
+                                <img src="Bottiglia bianco moline.png" alt="Reference Bottiglia Bianco" style="max-height: 520px; width: auto; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); display: block; margin: 0 auto; opacity: 0.9; background: transparent;">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tesi-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('tesi-modal')">&times;</span><embed src="TESI IL VINO COME STATUS SYMBOL.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+
+    <div id="camst-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('camst-modal')">&times;</span><embed src="Innovazione e sostenibilità modificato.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+
+    <div id="mozia-modal" class="modal">
+        <div class="modal-content mixed-modal" style="padding: 40px 20px;">
+            <span class="close-btn" onclick="closeModal('mozia-modal')" style="position: fixed; top: 3%; right: 3%;">&times;</span>
+            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; color: var(--dark-blue);">
+                <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.4rem;">Comunicato Stampa Ufficiale</h3>
+                    <p style="margin-bottom: 15px; font-weight: 500; line-height: 1.5;">Ho curato personalmente la stesura di questo comunicato stampa per raccontare l'impegno concreto di Baglio Oneto a fianco della Laguna dello Stagnone, unendo la valorizzazione del territorio alla spinta istituzionale per il riconoscimento UNESCO.</p>
+                    <embed src="Comunicato_Stampa_Baglio_Oneto_Premio_Mozia_2026.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf" style="width: 100%; height: 500px; border-radius: 4px;">
+                </div>
+                <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.4rem;">Rassegna Stampa & Link Utili</h3>
+                    <p style="margin-bottom: 15px;">Approfondimenti, post ufficiali e copertura mediatica dell'evento:</p>
+                    <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-weight: 600;">
+                        <li><a href="https://www.linkedin.com/posts/baglio-oneto_bagliooneto-premiomozia-unesco-activity-7490679469142183936-yWO1" target="_blank" style="color: var(--deep-red); text-decoration: underline;">Post ufficiale su LinkedIn (Baglio Oneto)</a></li>
+                        <li><a href="https://www.winerytastingsicily.com/magazine/it/notizie/mozia-la-perla-dellenoturismo-premia-i-talenti-ditalia-e-punta-allunesco/" target="_blank" style="color: var(--deep-red); text-decoration: underline;">Articolo di approfondimento su Winery Tasting Sicily</a></li>
+                        <li><a href="https://www.infobelice.it/2026/06/17/terza-edizione-del-premio-internazionale-mozia-baglio-oneto-al-fianco-dello-scrigno-fenicio/" target="_blank" style="color: var(--deep-red); text-decoration: underline;">Copertura su InfoBelice</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="balarm-modal" class="modal">
+        <div class="modal-content mixed-modal" style="padding: 40px 20px;">
+            <span class="close-btn" onclick="closeModal('balarm-modal', 'balarm-video')" style="position: fixed; top: 3%; right: 3%;">&times;</span>
+            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; color: var(--dark-blue);">
+                <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.4rem;">Articolo Dedicato su Balarm</h3>
+                    <p style="margin-bottom: 15px; font-weight: 500; line-height: 1.5;">Approfondimento editoriale concordato con la testata Balarm per raccontare l'eccellenza della location.</p>
+                    <a href="https://www.balarm.it/news/una-tenuta-da-sogno-per-il-vostro-si-prima-in-sicilia-come-miglior-location-d-europa-168678" target="_blank" style="display: inline-block; background: var(--deep-red); color: #fff; padding: 12px 24px; border-radius: 4px; text-decoration: none; font-weight: 700;">Leggi l'articolo su Balarm ↗</a>
+                </div>
+                <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.4rem;">Video Editoriale (Versione Clean)</h3>
+                    <p style="margin-bottom: 15px; font-weight: 500; line-height: 1.5;">Di seguito il video prodotto in collaborazione con la testata, presentato nella sua versione "clean" (senza logo editoriale) per il riutilizzo sui canali interni. Ho curato personalmente la direzione del contenuto, definendo i temi da trattare e occupandomi della scrittura, strutturazione e ripresa dell'intervista alla proprietà.</p>
+                    <video id="balarm-video" controls controlsList="nodownload" style="width: 100%; max-height: 500px; border-radius: 6px; background: #000; margin-bottom: 20px;">
+                        <source src="https://www.dropbox.com/scl/fi/y3neimeb3tr9rzq0td8gm/Video-Balarm.mp4?rlkey=2gqqvrid932um2gs64cov8dq6&st=1tmg6zz6&raw=1" type="video/mp4">
+                    </video>
+                    <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.2rem;">Pubblicazioni Social</h3>
+                    <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-weight: 600;">
+                        <li><a href="https://www.instagram.com/reel/DcTbXn9u130/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ==" target="_blank" style="color: var(--deep-red); text-decoration: underline;">Reel Sponsorizzato su Instagram (versione pubblicata) ↗</a></li>
+                        <li><a href="https://www.facebook.com/share/v/19CwGqcWvW/" target="_blank" style="color: var(--deep-red); text-decoration: underline;">Video Sponsorizzato su Facebook (versione pubblicata) ↗</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="influencer-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('influencer-modal')">&times;</span><embed src="case_study_creator_v4.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+
+    <div id="pasqua-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('pasqua-modal')">&times;</span><embed src="case_study_pasquav16.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+    <div id="ulisse-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('ulisse-modal')">&times;</span><embed src="case_study_ulisse_v9.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+
+    <!-- SCRIPT -->
+    <script>
+        function showSplitScreen() {
+            const welcome = document.getElementById('welcome-screen');
+            welcome.classList.add('hidden');
+
+            const intro = document.getElementById('intro-screen');
+            intro.classList.add('visible');
+        }
+
+        function selectSection(type) {
+            const intro = document.getElementById('intro-screen');
+            intro.classList.add('hidden');
+
+            const content = document.getElementById('portfolio-content');
+            content.style.display = 'block';
+            window.scrollTo(0, 0);
+
+            setTimeout(() => {
+                content.style.opacity = '1';
+                document.body.style.overflow = 'auto'; 
+            }, 50);
+
+            document.getElementById('creative-section').style.display = 'none';
+            document.getElementById('marketing-section').style.display = 'none';
+
+            if (type === 'creative') {
+                document.getElementById('creative-section').style.display = 'block';
+            } else if (type === 'marketing') {
+                document.getElementById('marketing-section').style.display = 'block';
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function goToWelcome(event) {
+            if(event) event.stopPropagation();
+            
+            const intro = document.getElementById('intro-screen');
+            intro.classList.remove('visible');
+
+            const welcome = document.getElementById('welcome-screen');
+            welcome.classList.remove('hidden');
+        }
+
+        function goToIntro() {
+            const content = document.getElementById('portfolio-content');
+            content.style.opacity = '0';
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                content.style.display = 'none';
+                window.scrollTo(0, 0);
+                const intro = document.getElementById('intro-screen');
+                intro.classList.remove('hidden');
+                intro.classList.add('visible');
+            }, 800);
+        }
+
+        function openModal(modalId) { 
+            document.getElementById(modalId).style.display = 'block'; 
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(modalId, audioIds = null) { 
+            document.getElementById(modalId).style.display = 'none'; 
+            document.body.style.overflow = 'auto'; 
+            
+            if(audioIds) {
+                if(Array.isArray(audioIds)) {
+                    audioIds.forEach(id => {
+                        const audioElement = document.getElementById(id);
+                        if(audioElement) { audioElement.pause(); audioElement.currentTime = 0; }
+                    });
+                } else {
+                    const audioElement = document.getElementById(audioIds);
+                    if(audioElement) { audioElement.pause(); audioElement.currentTime = 0; }
+                }
+            }
+        }
+
+        window.onclick = function(event) { 
+            if (event.target.classList.contains('modal')) { 
+                event.target.style.display = 'none'; 
+                document.body.style.overflow = 'auto'; 
+                const videos = document.querySelectorAll('video'); videos.forEach(video => video.pause()); 
+                const audios = document.querySelectorAll('audio'); audios.forEach(audio => { audio.pause(); audio.currentTime = 0; });
+            } 
+        }
+    </script>
+</body>
+</html>
