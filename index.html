@@ -295,7 +295,6 @@
             100% { transform: translateY(0) scale(1, 1); }
         }
 
-
         /* --- CONTENUTO PORTFOLIO --- */
         #portfolio-content {
             display: none;
@@ -578,7 +577,7 @@
                 <div class="card clickable" onclick="openModal('caritas-modal')">
                     <div class="card-category">Campagna Integrata | Shortlist Spot School Awards</div>
                     <h3>Caritas: "Wear the Change"</h3>
-                    <p>Progetto nato per trasformare la beneficenza in un nuevo trend per la Gen Z. Partendo dall'insight che 8 ragazzi su 10 acquistano second-hand, abbiamo immaginato di trasformare i magazzini Caritas in fashion LAB.</p>
+                    <p>Progetto nato per trasformare la beneficenza in un nuovo trend per la Gen Z. Partendo dall'insight che 8 ragazzi su 10 acquistano second-hand, abbiamo immaginato di trasformare i magazzini Caritas in fashion LAB.</p>
                     <span class="collab-credits">In collaborazione con Iris Cardarelli e Noemi Cornalba</span>
                     <div class="tags"><span>Brand Analysis</span><span>Copywriting</span></div>
                 </div>
@@ -798,6 +797,7 @@
         </div>
     </div>
 
+    <!-- MODAL BALARM AGGIORNATA CON VIDEO VERTICALE DROPBOX -->
     <div id="balarm-modal" class="modal">
         <div class="modal-content mixed-modal" style="padding: 40px 20px;">
             <span class="close-btn" onclick="closeModal('balarm-modal', 'balarm-video')" style="position: fixed; top: 3%; right: 3%;">&times;</span>
@@ -810,9 +810,15 @@
                 <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                     <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.4rem;">Video Editoriale (Versione Clean)</h3>
                     <p style="margin-bottom: 15px; font-weight: 500; line-height: 1.5;">Di seguito il video prodotto in collaborazione con la testata, presentato nella sua versione "clean" (senza logo editoriale) per il riutilizzo sui canali interni. Ho curato personalmente la direzione del contenuto, definendo i temi da trattare e occupandomi della scrittura, strutturazione e ripresa dell'intervista alla proprietà.</p>
-                    <video id="balarm-video" controls controlsList="nodownload" style="width: 100%; max-height: 500px; border-radius: 6px; background: #000; margin-bottom: 20px;">
-                        <source src="https://www.dropbox.com/scl/fi/y3neimeb3tr9rzq0td8gm/Video-Balarm.mp4?rlkey=2gqqvrid932um2gs64cov8dq6&st=1tmg6zz6&raw=1" type="video/mp4">
-                    </video>
+                    
+                    <!-- INIZIO VIDEO VERTICALE BALARM -->
+                    <div style="text-align: center;">
+                        <video id="balarm-video" controls controlsList="nodownload" playsinline style="width: auto; max-width: 100%; max-height: 70vh; border-radius: 6px; background: transparent; margin: 0 auto 20px auto; display: block;">
+                            <source src="https://www.dropbox.com/scl/fi/iwvbpem0crin6e6ieqnoz/Baglio_NOlogo.mov?rlkey=l5dwqccpqg4qdg1ou2a4bm7j0&st=x6q7gxsc&raw=1" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- FINE VIDEO VERTICALE BALARM -->
+                    
                     <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.2rem;">Pubblicazioni Social</h3>
                     <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-weight: 600;">
                         <li><a href="https://www.instagram.com/reel/DcTbXn9u130/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ==" target="_blank" style="color: var(--deep-red); text-decoration: underline;">Reel Sponsorizzato su Instagram (versione pubblicata) ↗</a></li>
