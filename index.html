@@ -332,6 +332,7 @@
         .sub-section-title { font-size: 1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        #creative-section .grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
 
         .card {
             background-color: var(--pink); color: var(--dark-blue); padding: 2rem; border-radius: 6px;
@@ -364,6 +365,15 @@
         .tags span { display: inline-block; padding: 6px 12px; border-radius: 2px; font-size: 0.75rem; font-weight: 600; margin-right: 6px; margin-bottom: 6px; }
         #creative-section .tags span { background: var(--light-blue); color: var(--dark-blue); }
         #marketing-section .tags span { background: var(--pink); color: var(--deep-red); }
+
+        /* Copertine in alto a tutta larghezza per le card creative. */
+        .card.creative-project-card { padding: 0; overflow: hidden; }
+        .creative-project-cover { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; flex-shrink: 0; }
+        .creative-project-details { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+        .creative-project-details .card-category { margin-bottom: 0.6rem; }
+        .creative-project-details h3 { margin-bottom: 0.6rem; }
+        .creative-project-details p { flex-grow: 0; margin-bottom: 1rem; }
+        .creative-project-details .collab-credits { margin-bottom: 1rem; }
 
         /* --- MODAL --- */
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(10, 28, 58, 0.95); backdrop-filter: blur(5px); }
@@ -513,80 +523,131 @@
             
             <h3 class="sub-section-title">PROGETTI PROFESSIONALI & ESPERIENZE</h3>
             <div class="grid" style="margin-bottom: 3rem;">
-                <div class="card clickable" onclick="openModal('shooting-modal')">
-                    <div class="card-category">Art Direction & Production</div>
-                    <h3>Luxury Wine Resort 5★: Shooting & Video Production</h3>
-                    <p>Direzione artistica e coordinamento sul set per la produzione visiva di Baglio Oneto dei Principi di San Lorenzo. Dalla pianificazione delle riprese alla cura del set design, fino alla supervisione diretta dei fornitori per la fotografia e il videomaking, garantendo un racconto visivo elegante e fedele all'identità del resort.</p>
-                    <div class="tags"><span>Art Direction</span><span>Set Design</span><span>Photo & Video</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('shooting-modal')">
+                    <img class="creative-project-cover" src="shooting cover.png" alt="Copertina – Luxury Wine Resort 5★: Shooting &amp; Video Production" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Art Direction & Production</div>
+                        <h3>Luxury Wine Resort 5★: Shooting & Video Production</h3>
+                        <p>Direzione artistica e coordinamento sul set per la produzione visiva di Baglio Oneto dei Principi di San Lorenzo.</p>
+                        <div class="tags"><span>Art Direction</span><span>Set Design</span><span>Photo & Video</span></div>
+                    </div>
                 </div>
 
-                <div class="card clickable" onclick="openModal('moline-modal')">
-                    <div class="card-category">Graphic Design & Packaging</div>
-                    <h3>Osteria delle Moline: Wine Label Design</h3>
-                    <p>Progettazione e sviluppo grafico di due etichette per il vino della casa, coniugando l'identità del brand con un'estetica ricercata e distintiva per il packaging di sala.</p>
-                    <div class="tags"><span>Label Design</span><span>Packaging</span><span>Visual Identity</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('moline-modal')">
+                    <img class="creative-project-cover" src="etichette cover.png" alt="Copertina – Osteria delle Moline: Wine Label Design" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Graphic Design & Packaging</div>
+                        <h3>Osteria delle Moline: Wine Label Design</h3>
+                        <p>Progettazione e sviluppo grafico di due etichette per il vino della casa.</p>
+                        <div class="tags"><span>Label Design</span><span>Packaging</span><span>Visual Identity</span></div>
+                    </div>
                 </div>
             </div>
 
             <h3 class="sub-section-title">Progetti Accademici (Master IED)</h3>
             <div class="grid">
-                <div class="card clickable" onclick="openModal('swedish-modal')">
-                    <div class="card-category">Human Insights & Interactive Web App</div>
-                    <h3>The Swedish Number: International Keypad</h3>
-                    <p>Esame HUMAN INSIGHT: analisi strategica della celebre campagna svedese pluripremiata, raccontata con lo sviluppo di un'applicazione web interattiva che simula un tastierino telefonico.</p>
-                    <div class="tags"><span>Human Insights</span><span>Web App</span><span>Strategy & UI</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('swedish-modal')">
+                    <img class="creative-project-cover" src="the swedish cover.png" alt="Copertina – The Swedish Number: International Keypad" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Human Insights & Interactive Web App</div>
+                        <h3>The Swedish Number: International Keypad</h3>
+                        <p>Esame HUMAN INSIGHT: analisi strategica della celebre campagna svedese pluripremiata, raccontata con lo sviluppo di un'applicazione web.</p>
+                        <div class="tags"><span>Human Insights</span><span>Web App</span><span>Strategy & UI</span></div>
+                    </div>
                 </div>
 
-                <div class="card clickable" onclick="openModal('delonghi-modal')">
-                    <div class="card-category">DOOH Campaign Concept</div>
-                    <h3>De'Longhi: The Regret Cappuccino</h3>
-                    <p>Campagna DOOH dinamica collegata in tempo reale ai dati meteo. Sfruttando l'insight del disagio mattutino sotto pioggia e freddo, i cartelloni affissi vicino ai bar ironizzano sul tragitto per ricordare che il cappuccino perfetto si poteva fare a casa.</p>
-                    <div class="tags"><span>DOOH</span><span>Copywriting</span><span>Dynamic Advertising</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('delonghi-modal')">
+                    <img class="creative-project-cover" src="de longhi cover.png" alt="Copertina – De&#x27;Longhi: The Regret Cappuccino" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">DOOH Campaign Concept</div>
+                        <h3>De'Longhi: The Regret Cappuccino</h3>
+                        <p>Campagna DOOH dinamica collegata in tempo reale ai dati meteo.</p>
+                        <div class="tags"><span>DOOH</span><span>Copywriting</span><span>Dynamic Advertising</span></div>
+                    </div>
                 </div>
 
-                <div class="card clickable" onclick="openModal('netflix-board-modal')">
-                    <div class="card-category">Launch Campaign Concept</div>
-                    <h3>Netflix: Il Falso Perfetto di Nairobi</h3>
-                    <p>Campagna di lancio per lo spin off de La Casa di Carta incentrato su Nairobi. Sfruttando la viralità della notizia del furto al Louvre, viene installata in piazza una teca contenente dei falsi d'autore dei gioielli rubati; illuminandoli con lampade UV svelano una filigrana luminescente con la data di uscita della serie tv.</p>
-                    <div class="tags"><span>Guerrilla Marketing</span><span>Viral Campaign</span><span>Activation</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('netflix-board-modal')">
+                    <img class="creative-project-cover" src="Nairobi cover.png" alt="Copertina – Netflix: Il Falso Perfetto di Nairobi" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Launch Campaign Concept</div>
+                        <h3>Netflix: Il Falso Perfetto di Nairobi</h3>
+                        <p>Campagna di lancio per lo spin-off de La Casa di Carta dedicato a Nairobi, che sfrutta la viralità della notizia del furto al Louvre.</p>
+                        <div class="tags"><span>Guerrilla Marketing</span><span>Viral Campaign</span><span>Activation</span></div>
+                    </div>
                 </div>
 
-                <div class="card clickable" onclick="openModal('redbull-modal')">
-                    <div class="card-category">Experiential Activation</div>
-                    <h3>Red Bull x The North Face: Urban Alpinism</h3>
-                    <p>Attivazione esperienziale che trasforma le facciate di palazzi storici urbani in pareti d'arrampicata temporanee. I passanti più coraggiosi possono tentare la scalata imbracati, riforniti dall'energia di Red Bull e attrezzati da The North Face.</p>
-                    <div class="tags"><span>Experiential Activation</span><span>Brand Partnership</span><span>Urban Sports</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('redbull-modal')">
+                    <img class="creative-project-cover" src="redbull cover.png" alt="Copertina – Red Bull x The North Face: Urban Alpinism" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Experiential Activation</div>
+                        <h3>Red Bull x The North Face: Urban Alpinism</h3>
+                        <p>Attivazione esperienziale che trasforma le facciate di palazzi storici urbani in pareti d'arrampicata.</p>
+                        <div class="tags"><span>Experiential Activation</span><span>Brand Partnership</span><span>Urban Sports</span></div>
+                    </div>
                 </div>
 
-                <div class="card clickable" onclick="openModal('kinder-modal')">
-                    <div class="card-category">Brand Collab Concept</div>
-                    <h3>Kinder x IKEA: Casa Dolce Casa</h3>
-                    <p>Un'intuizione creativa che coniuga il rigore del design funzionale con la golosità dei prodotti dolciari più iconici. Una collezione d'arredamento in cui ogni elemento richiama la consistenza, i colori e il piacere visivo degli snack che hanno segnato la nostra infanzia.</p>
-                    <span class="collab-credits">In collaborazione con Matteo Tirocchi</span>
-                    <div class="tags"><span>Art Direction</span><span>Copywriting</span><span>Concept Design</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('kinder-modal')">
+                    <img class="creative-project-cover" src="kinder cover.png" alt="Copertina – Kinder x IKEA: Casa Dolce Casa" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Brand Collab Concept</div>
+                        <h3>Kinder x IKEA: Casa Dolce Casa</h3>
+                        <p>Una collezione d’arredamento che unisce il design funzionale di IKEA ai colori e alle forme degli iconici snack Kinder.</p>
+                        <span class="collab-credits">In collaborazione con Matteo Tirocchi</span>
+                        <div class="tags"><span>Art Direction</span><span>Copywriting</span><span>Concept Design</span></div>
+                    </div>
                 </div>
 
-                <div class="card clickable" onclick="openModal('netflix-modal')">
-                    <div class="card-category">Video Production</div>
-                    <h3>Spot Netflix</h3>
-                    <p>Progetto realizzato interamente in autonomia, dall'ideazione dello script all'allestimento del set. Abbiamo curato la regia, gestito il noleggio tecnico e operato in prima persona su videocamera, illuminazione e microfonazione boom per le riprese audio/video.</p>
-                    <span class="collab-credits">In collaborazione con Michela Caruso, Anita Artioli, Diego Demartis</span>
-                    <div class="tags"><span>Video Making</span><span>Scriptwriting</span><span>Directing</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('netflix-modal')">
+                    <img class="creative-project-cover" src="Alibi - Netflix _ COPERTINA.jpg" alt="Copertina di Alibi – Spot Netflix" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Video Production</div>
+                        <h3>Spot Netflix</h3>
+                        <p>Alibi: uno spot Netflix curato dall’ideazione alla regia e alle riprese.</p>
+                        <span class="collab-credits">In collaborazione con Michela Caruso, Anita Artioli, Diego Demartis</span>
+                        <div class="tags"><span>Video Making</span><span>Scriptwriting</span><span>Directing</span></div>
+                    </div>
                 </div>
 
-                <div class="card clickable" onclick="openModal('sincro-modal')">
-                    <div class="card-category">UI/UX Design</div>
-                    <h3>SINCRO Mobile App</h3>
-                    <p>Progettazione degli sketch UI e prototipazione interattiva su Figma per un'applicazione dedicata al mood tracking e alla comunicazione emotiva di coppia.</p>
-                    <span class="collab-credits">In collaborazione con Ginevra Di Foggia, Noemi Cornalba e Michele Ferrandi</span>
-                    <div class="tags"><span>Figma</span><span>Prototyping</span><span>App Design</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('sincro-modal')">
+                    <img class="creative-project-cover" src="mobile app cover.png" alt="Copertina – SINCRO Mobile App" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">UI/UX Design</div>
+                        <h3>SINCRO Mobile App</h3>
+                        <p>Progettazione degli sketch UI e prototipazione interattiva su Figma per un'applicazione dedicata al mood tracking e alla comunicazione emotiva di coppia.</p>
+                        <span class="collab-credits">In collaborazione con Ginevra Di Foggia, Noemi Cornalba e Michele Ferrandi</span>
+                        <div class="tags"><span>Figma</span><span>Prototyping</span><span>App Design</span></div>
+                    </div>
                 </div>
 
-                <div class="card clickable" onclick="openModal('amplifon-modal')">
-                    <div class="card-category">Radio Advertising & Copywriting</div>
-                    <h3>Amplifon: Spot Radio & AI Voice</h3>
-                    <p>Ideazione e scrittura di due spot radio ironici focalizzati sull'ascolto consapevole. Gli spot sono stati ideati, sceneggiati e registrati utilizzando l'intelligenza artificiale per la generazione e sincronizzazione delle voci.</p>
-                    <div class="tags"><span>Radio Spot</span><span>Copywriting</span><span>AI Audio Generation</span></div>
+                <div class="card clickable creative-project-card" onclick="openModal('amplifon-modal')">
+                    <img class="creative-project-cover" src="amplifon cover.png" alt="Copertina – Amplifon: Spot Radio &amp; AI Voice" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Radio Advertising & Copywriting</div>
+                        <h3>Amplifon: Spot Radio & AI Voice</h3>
+                        <p>Ideazione e scrittura di due spot radio ironici focalizzati sull'ascolto consapevole.</p>
+                        <div class="tags"><span>Radio Spot</span><span>Copywriting</span><span>AI Audio Generation</span></div>
+                    </div>
+                </div>
+
+                <div class="card clickable creative-project-card" onclick="openModal('liquid-death-modal')">
+                    <img class="creative-project-cover" src="cover.png" alt="Copertina – Liquid Death: Thirsty Attack" loading="lazy" style="object-position: top;">
+                    <div class="creative-project-details">
+                        <div class="card-category">Integrated Campaign Concept &amp; Video Production</div>
+                        <h3>Liquid Death: Thirsty Attack</h3>
+                        <p>Un concept che reinterpreta l’espressione “morire di sete” con l’ironia provocatoria di Liquid Death.</p>
+                        <span class="collab-credits">In collaborazione con Ginevra Di Foggia, Matteo Tirocchi e Rebecca Pierucci</span>
+                        <div class="tags"><span>Creative Concept</span><span>Video Production</span><span>Gamification</span></div>
+                    </div>
+                </div>
+
+                <div class="card clickable creative-project-card" onclick="openModal('heinz-modal')">
+                    <img class="creative-project-cover" src="copertine card portfolio 1200x900.png" alt="Copertina – Heinz x AIA: The Perfect Match" loading="lazy">
+                    <div class="creative-project-details">
+                        <div class="card-category">Integrated Campaign &amp; Brand Partnership</div>
+                        <h3>Heinz x AIA: The Perfect Match</h3>
+                        <p>Una campagna integrata che unisce Heinz e AIA attraverso un’etichetta divisa a metà, che si completa solo affiancando ketchup e hamburger.</p>
+                        <div class="tags"><span>Packaging Concept</span><span>OOH</span><span>Guerrilla Marketing</span></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -694,7 +755,27 @@
     </div>
     
     <div id="kinder-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('kinder-modal')">&times;</span><embed src="Kinder x Ikea.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
-    <div id="netflix-modal" class="modal"><div class="modal-content video-modal"><span class="close-btn" onclick="closeModal('netflix-modal', 'netflix-video')">&times;</span><video id="netflix-video" controls controlsList="nodownload"><source src="https://www.dropbox.com/scl/fi/lsw0m99ldn0iuj0scblao/SPOT-NETFLIX.mp4?rlkey=dr2d2lghlopp9am79ctu5hauo&st=5i12b7sm&raw=1" type="video/mp4"></video></div></div>
+    <div id="heinz-modal" class="modal">
+        <div class="modal-content pdf-modal">
+            <span class="close-btn" onclick="closeModal('heinz-modal')">&times;</span>
+            <embed src="pagano board heinz (1).pdf#toolbar=0&amp;navpanes=0&amp;view=Fit" type="application/pdf" title="Board Heinz x AIA: The Perfect Match">
+        </div>
+    </div>
+
+    <div id="liquid-death-modal" class="modal">
+        <div class="modal-content mixed-modal">
+            <span class="close-btn" onclick="closeModal('liquid-death-modal', 'liquid-death-video')">&times;</span>
+            <video id="liquid-death-video" controls controlsList="nodownload" preload="metadata">
+                <source src="https://www.dropbox.com/scl/fi/bqe4emrtvzar3guqikgl6/Liquid-Death-spot.mp4?rlkey=epygf2t5dq6fd2o9ixewk2wma&amp;raw=1" type="video/mp4">
+            </video>
+            <a href="liquid death board (1).jpg" target="_blank" rel="noopener" aria-label="Apri la board Liquid Death a dimensione originale">
+                <img src="liquid death board (1).jpg" alt="Board Liquid Death: Thirsty Attack – concept ed esecuzioni" loading="lazy" style="display: block; width: 100%; height: auto; border-radius: 6px;">
+            </a>
+            <p style="margin-top: 1rem;"><a href="liquid death board (1).jpg" target="_blank" rel="noopener">Apri la board a dimensione originale</a></p>
+        </div>
+    </div>
+
+    <div id="netflix-modal" class="modal"><div class="modal-content mixed-modal"><span class="close-btn" onclick="closeModal('netflix-modal', 'netflix-video')">&times;</span><video id="netflix-video" controls controlsList="nodownload" preload="metadata"><source src="https://www.dropbox.com/scl/fi/0xilmhex621timgxlwe4v/Alibi-Netflix-_-SPOT.mp4?rlkey=96ezlldzkjkpnooaeulnpnwso&amp;raw=1" type="video/mp4"></video><embed src="Alibi - Netflix _ BOARD.pdf#toolbar=0&amp;navpanes=0&amp;view=Fit" type="application/pdf"><p><a href="Alibi - Netflix _ BOARD.pdf" target="_blank" rel="noopener">Apri la board in una nuova scheda</a></p></div></div>
     <div id="sincro-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('sincro-modal')">&times;</span><iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FLxh1YqGxHEeG5b1pIosms7%2FMOBILE-APP%3Fnode-id%3D255-77%26t%3D6m0ZTTR0F5guLkcj-1" allowfullscreen></iframe></div></div>
     
     <div id="swedish-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('swedish-modal')">&times;</span><iframe src="https://alida-humaninsights.netlify.app/" allowfullscreen></iframe></div></div>
