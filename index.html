@@ -408,9 +408,46 @@
         .close-btn:hover { background: var(--deep-red); color: #fff; transform: scale(1.1); }
         iframe, video, embed { border: none; outline: none; width: 100%; height: 100%; }
 
+        .mobile-document-link { display: none; }
         @media (max-width: 768px) {
-            #intro-screen { flex-direction: column; overflow-y: auto; height: auto; min-height: 100vh; }
-            .intro-side { padding: 3rem 1.5rem; border-right: none; border-bottom: 2px solid var(--dark-blue); }
+            #welcome-screen { width: 100%; height: 100dvh; overflow-y: auto; padding: 1.5rem; }
+            .welcome-box h1 { white-space: normal; font-size: clamp(1.8rem, 7.5vw, 3.2rem); letter-spacing: -0.7px; overflow-wrap: break-word; }
+            .welcome-box p { font-size: 1rem; }
+            #intro-screen { width: 100%; height: 100dvh; overflow-y: auto; }
+            .intro-split-container { flex-direction: column; height: auto; min-height: 100%; padding-top: 4.5rem; }
+            .intro-side { flex: none; padding: 1.75rem 1.25rem; border-right: none; min-width: 0; }
+            .intro-side:hover { flex: none; }
+            .messy-side { border-bottom: 2px solid var(--dark-blue); }
+            .intro-side-title { font-size: 1.4rem; }
+            .intro-text { font-size: 0.95rem; }
+            .intro-mascot { width: 100px; height: 100px; }
+            .intro-back-btn, .back-nav { top: max(12px, env(safe-area-inset-top)); left: 12px; }
+            .back-btn, .intro-back-btn { min-height: 44px; padding: 10px 16px; font-size: 0.75rem; }
+            .portfolio-section { padding: 5rem 1rem 2rem; }
+            .section-title { font-size: clamp(1.8rem, 7vw, 2.5rem); overflow-wrap: break-word; }
+            .grid, #creative-section .grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+            .card { min-width: 0; padding: 1.25rem; }
+            .creative-project-details { padding: 1.25rem; }
+            .card h3 { font-size: 1.25rem; }
+            .card p, .collab-credits { overflow-wrap: anywhere; }
+            .modal { height: 100dvh; }
+            .modal-content { width: calc(100% - 16px); height: calc(100dvh - 16px); margin: 8px auto; }
+            .mixed-modal, .audio-modal { padding: 64px 16px 20px !important; overflow-y: auto; }
+            .audio-modal { justify-content: flex-start; gap: 20px; }
+            .audio-container { padding: 16px; }
+            .modal .close-btn { position: fixed !important; top: max(16px, env(safe-area-inset-top)) !important; right: 16px !important; width: 44px; height: 44px; }
+            .mixed-modal video { height: auto; max-height: 60dvh !important; object-fit: contain; }
+            .modal-content img { max-width: 100%; }
+            #moline-modal div[style*="min-width"] { min-width: 0 !important; flex-basis: 100% !important; }
+            .pdf-modal { padding-top: 64px; }
+            .mobile-document-link { display: block; color: var(--dark-blue); font-weight: 600; padding: 12px; overflow-wrap: anywhere; }
+            .pdf-modal:has(.mobile-document-link) { display: flex; flex-direction: column; }
+            .pdf-modal embed { flex: 1; min-height: 0; }
+            .mixed-modal embed { height: 65dvh !important; }
+        }
+        @media (max-height: 500px) and (max-width: 768px) {
+            #welcome-screen { justify-content: flex-start; }
+            .welcome-box { gap: 0.75rem; }
         }
     </style>
 </head>
@@ -734,19 +771,19 @@
             <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
                 <div style="text-align: center;">
                     <h3 style="color: var(--deep-red); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase;">Portfolio Shooting</h3>
-                    <video id="shooting-video-1" controls controlsList="nodownload" style="width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
+                    <video playsinline id="shooting-video-1" controls controlsList="nodownload" style="width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
                         <source src="https://www.dropbox.com/scl/fi/xgax7yq392t192ovmkr8i/Portfolio-Shooting.mp4?rlkey=aq3pnjik7pri2jqp75mdznftu&st=wqbekisx&raw=1" type="video/mp4">
                     </video>
                 </div>
                 <div style="text-align: center;">
                     <h3 style="color: var(--deep-red); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase;">Final Cut - Orizzontale (Amunì Studio)</h3>
-                    <video id="shooting-video-2" controls controlsList="nodownload" style="width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
+                    <video playsinline id="shooting-video-2" controls controlsList="nodownload" style="width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
                         <source src="https://www.dropbox.com/scl/fi/7v2inkwnaswv8e2ar7ygy/AMUNI_FreeReel_HD.mp4?rlkey=vcsxy6bn3s46hodegxrq2o1v1&st=3g5r49qt&raw=1" type="video/mp4">
                     </video>
                 </div>
                 <div style="text-align: center;">
                     <h3 style="color: var(--deep-red); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase;">Final Cut - Verticale (Amunì Studio)</h3>
-                    <video id="shooting-video-3" controls controlsList="nodownload" style="width: auto; max-width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
+                    <video playsinline id="shooting-video-3" controls controlsList="nodownload" style="width: auto; max-width: 100%; max-height: 70vh; border-radius: 6px; background: transparent;">
                         <source src="https://www.dropbox.com/scl/fi/1kiavvxzennl4jw8m4zuh/AMUNI_FreeReel_VT.mp4?rlkey=lobl0dl1upvp3oodd283gspot&st=n85btrml&raw=1" type="video/mp4">
                     </video>
                 </div>
@@ -754,18 +791,18 @@
         </div>
     </div>
     
-    <div id="kinder-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('kinder-modal')">&times;</span><embed src="Kinder x Ikea.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+    <div id="kinder-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('kinder-modal')">&times;</span><embed src="Kinder x Ikea.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"><a class="mobile-document-link" href="Kinder x Ikea.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
     <div id="heinz-modal" class="modal">
         <div class="modal-content pdf-modal">
             <span class="close-btn" onclick="closeModal('heinz-modal')">&times;</span>
-            <embed src="pagano board heinz (1).pdf#toolbar=0&amp;navpanes=0&amp;view=Fit" type="application/pdf" title="Board Heinz x AIA: The Perfect Match">
+            <embed src="pagano board heinz (1).pdf#toolbar=0&amp;navpanes=0&amp;view=Fit" type="application/pdf" title="Board Heinz x AIA: The Perfect Match"><a class="mobile-document-link" href="pagano board heinz (1).pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a>
         </div>
     </div>
 
     <div id="liquid-death-modal" class="modal">
         <div class="modal-content mixed-modal">
             <span class="close-btn" onclick="closeModal('liquid-death-modal', 'liquid-death-video')">&times;</span>
-            <video id="liquid-death-video" controls controlsList="nodownload" preload="metadata">
+            <video playsinline id="liquid-death-video" controls controlsList="nodownload" preload="metadata">
                 <source src="https://www.dropbox.com/scl/fi/bqe4emrtvzar3guqikgl6/Liquid-Death-spot.mp4?rlkey=epygf2t5dq6fd2o9ixewk2wma&amp;raw=1" type="video/mp4">
             </video>
             <a href="liquid death board (1).jpg" target="_blank" rel="noopener" aria-label="Apri la board Liquid Death a dimensione originale">
@@ -775,15 +812,15 @@
         </div>
     </div>
 
-    <div id="netflix-modal" class="modal"><div class="modal-content mixed-modal"><span class="close-btn" onclick="closeModal('netflix-modal', 'netflix-video')">&times;</span><video id="netflix-video" controls controlsList="nodownload" preload="metadata"><source src="https://www.dropbox.com/scl/fi/0xilmhex621timgxlwe4v/Alibi-Netflix-_-SPOT.mp4?rlkey=96ezlldzkjkpnooaeulnpnwso&amp;raw=1" type="video/mp4"></video><embed src="Alibi - Netflix _ BOARD.pdf#toolbar=0&amp;navpanes=0&amp;view=Fit" type="application/pdf"><p><a href="Alibi - Netflix _ BOARD.pdf" target="_blank" rel="noopener">Apri la board in una nuova scheda</a></p></div></div>
+    <div id="netflix-modal" class="modal"><div class="modal-content mixed-modal"><span class="close-btn" onclick="closeModal('netflix-modal', 'netflix-video')">&times;</span><video playsinline id="netflix-video" controls controlsList="nodownload" preload="metadata"><source src="https://www.dropbox.com/scl/fi/0xilmhex621timgxlwe4v/Alibi-Netflix-_-SPOT.mp4?rlkey=96ezlldzkjkpnooaeulnpnwso&amp;raw=1" type="video/mp4"></video><embed src="Alibi - Netflix _ BOARD.pdf#toolbar=0&amp;navpanes=0&amp;view=Fit" type="application/pdf"><a class="mobile-document-link" href="Alibi - Netflix _ BOARD.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a><p><a href="Alibi - Netflix _ BOARD.pdf" target="_blank" rel="noopener">Apri la board in una nuova scheda</a></p></div></div>
     <div id="sincro-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('sincro-modal')">&times;</span><iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FLxh1YqGxHEeG5b1pIosms7%2FMOBILE-APP%3Fnode-id%3D255-77%26t%3D6m0ZTTR0F5guLkcj-1" allowfullscreen></iframe></div></div>
     
     <div id="swedish-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('swedish-modal')">&times;</span><iframe src="https://alida-humaninsights.netlify.app/" allowfullscreen></iframe></div></div>
 
     <!-- BOARD VERTICALI OTTIMIZZATE (VIEW=FIT) -->
-    <div id="delonghi-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('delonghi-modal')">&times;</span><embed src="Board De Longhi).pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"></div></div>
-    <div id="netflix-board-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('netflix-board-modal')">&times;</span><embed src="Board Netflixpdf.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"></div></div>
-    <div id="redbull-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('redbull-modal')">&times;</span><embed src="Board RedBullpdf.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"></div></div>
+    <div id="delonghi-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('delonghi-modal')">&times;</span><embed src="Board De Longhi).pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"><a class="mobile-document-link" href="Board De Longhi).pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
+    <div id="netflix-board-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('netflix-board-modal')">&times;</span><embed src="Board Netflixpdf.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"><a class="mobile-document-link" href="Board Netflixpdf.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
+    <div id="redbull-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('redbull-modal')">&times;</span><embed src="Board RedBullpdf.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf"><a class="mobile-document-link" href="Board RedBullpdf.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
 
     <div id="amplifon-modal" class="modal">
         <div class="modal-content audio-modal">
@@ -843,9 +880,9 @@
         </div>
     </div>
 
-    <div id="tesi-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('tesi-modal')">&times;</span><embed src="TESI IL VINO COME STATUS SYMBOL.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+    <div id="tesi-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('tesi-modal')">&times;</span><embed src="TESI IL VINO COME STATUS SYMBOL.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"><a class="mobile-document-link" href="TESI IL VINO COME STATUS SYMBOL.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
 
-    <div id="camst-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('camst-modal')">&times;</span><embed src="Innovazione e sostenibilità modificato.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+    <div id="camst-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('camst-modal')">&times;</span><embed src="Innovazione e sostenibilità modificato.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"><a class="mobile-document-link" href="Innovazione e sostenibilità modificato.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
 
     <div id="mozia-modal" class="modal">
         <div class="modal-content mixed-modal" style="padding: 40px 20px;">
@@ -854,7 +891,7 @@
                 <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                     <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.4rem;">Comunicato Stampa Ufficiale</h3>
                     <p style="margin-bottom: 15px; font-weight: 500; line-height: 1.5;">Ho curato personalmente la stesura di questo comunicato stampa per raccontare l'impegno concreto di Baglio Oneto a fianco della Laguna dello Stagnone, unendo la valorizzazione del territorio alla spinta istituzionale per il riconoscimento UNESCO.</p>
-                    <embed src="Comunicato_Stampa_Baglio_Oneto_Premio_Mozia_2026.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf" style="width: 100%; height: 500px; border-radius: 4px;">
+                    <embed src="Comunicato_Stampa_Baglio_Oneto_Premio_Mozia_2026.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf" style="width: 100%; height: 500px; border-radius: 4px;"><a class="mobile-document-link" href="Comunicato_Stampa_Baglio_Oneto_Premio_Mozia_2026.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a>
                 </div>
                 <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                     <h3 style="margin-bottom: 15px; color: var(--deep-red); font-size: 1.4rem;">Rassegna Stampa & Link Utili</h3>
@@ -901,10 +938,10 @@
         </div>
     </div>
 
-    <div id="influencer-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('influencer-modal')">&times;</span><embed src="case_study_creator_v4.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+    <div id="influencer-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('influencer-modal')">&times;</span><embed src="case_study_creator_v4.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"><a class="mobile-document-link" href="case_study_creator_v4.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
 
-    <div id="pasqua-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('pasqua-modal')">&times;</span><embed src="case_study_pasquav16.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
-    <div id="ulisse-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('ulisse-modal')">&times;</span><embed src="case_study_ulisse_v9.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"></div></div>
+    <div id="pasqua-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('pasqua-modal')">&times;</span><embed src="case_study_pasquav16.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"><a class="mobile-document-link" href="case_study_pasquav16.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
+    <div id="ulisse-modal" class="modal"><div class="modal-content pdf-modal"><span class="close-btn" onclick="closeModal('ulisse-modal')">&times;</span><embed src="case_study_ulisse_v9.pdf#toolbar=0&navpanes=0&view=FitH" type="application/pdf"><a class="mobile-document-link" href="case_study_ulisse_v9.pdf" target="_blank" rel="noopener">Apri il PDF in una nuova scheda</a></div></div>
 
     <!-- SCRIPT -->
     <script>
